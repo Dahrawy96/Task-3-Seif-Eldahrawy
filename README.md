@@ -1,1 +1,3 @@
-# Task-3-Seif-Eldahrawy
+Phishing Awareness Analysis Tool
+
+This project is a Python-based Phishing Awareness Analysis Tool that helps users identify potentially fraudulent emails and messages. The application scans user-provided text for suspicious indicators such as urgency-related phrases, account verification requests, financial demands, and embedded links that are commonly associated with phishing attacks. Based on the detected warning signs, the tool classifies messages as Safe, Suspicious, or Malicious and provides recommended actions along with an explanation of the findings. The project demonstrates the use of string processing, keyword-based threat detection, conditional logic, and basic cybersecurity principles to promote user awareness and safe online practices.
