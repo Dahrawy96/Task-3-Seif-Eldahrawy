@@ -1,0 +1,82 @@
+suspicious_keywords = [
+    "urgent",
+    "verify",
+    "password",
+    "click here",
+    "account suspended",
+    "login",
+    "confirm identity",
+    "security alert",
+    "limited time",
+    "update account"
+]
+
+malicious_keywords = [
+    "wire transfer",
+    "send money",
+    "payment immediately",
+    "bank details",
+    "credit card",
+    "gift card",
+    "confidential",
+    "transfer funds",
+    "financial information"
+]
+
+message = input("Paste the email or message:\n").lower()
+
+red_flags = []
+
+for word in suspicious_keywords:
+    if word in message:
+        red_flags.append(f"Suspicious keyword detected: '{word}'")
+
+for word in malicious_keywords:
+    if word in message:
+        red_flags.append(f"High-risk keyword detected: '{word}'")
+
+if "http://" in message or "https://" in message:
+    red_flags.append("A link was detected in the message.")
+
+if len(red_flags) == 0:
+    classification = "SAFE"
+    action = "CLOSE"
+    explanation = (
+        "No obvious phishing indicators were detected. "
+        "The message does not contain suspicious keywords, "
+        "financial requests, or suspicious links."
+    )
+
+elif any("High-risk" in flag for flag in red_flags):
+    classification = "MALICIOUS"
+    action = "BLOCK & ESCALATE"
+    explanation = (
+        "The message contains high-risk indicators commonly used "
+        "in phishing and financial fraud attacks. Users should not "
+        "interact with the message and it should be reported "
+        "immediately to security personnel."
+    )
+
+else:
+    classification = "SUSPICIOUS"
+    action = "WARN USER"
+    explanation = (
+        "The message contains several indicators commonly found in "
+        "phishing attempts, such as urgency, account verification "
+        "requests, or suspicious links. The user should verify the "
+        "sender before taking any action."
+    )
+
+print(f"\nClassification: {classification}")
+print(f"Recommended Action: {action}")
+
+print("\nRed Flags Found:")
+if red_flags:
+    for flag in red_flags:
+        print("-", flag)
+else:
+    print("- None")
+
+print("\nExplanation:")
+print(explanation)
+
